@@ -1,20 +1,27 @@
 # ABFireBaseKit
 
-ABFireBaseKit is a Swift package that provides a convenient wrapper around Firebase services, specifically focusing on Authentication and Realtime Database/Firestore operations. This package simplifies Firebase integration and provides a protocol-oriented approach to handling Firebase operations.
-Features
+**ABFireBaseKit** is a Swift package that provides a convenient wrapper around Firebase services, specifically focusing on Authentication, Realtime Database, and Firestore operations. This package simplifies Firebase integration and provides a protocol-oriented approach to handling Firebase operations.
 
-Firebase Authentication (Sign Up/Sign In)
-Realtime Database CRUD operations
-Cloud Firestore support
-Flexible database switching
-Protocol-oriented architecture
-Async/await support
-Type-safe database operations
+---
 
-Installation
-Add ABFireBaseKit to your project using Swift Package Manager:
+## Features
 
-```
+- 📊 **Realtime Database CRUD Operations**
+- 📚 **Cloud Firestore Support**
+- 🔄 **Flexible Database Switching**
+- 🧩 **Protocol-Oriented Architecture**
+- ⚡ **Async/Await Support**
+- 💡 **Type-Safe Database Operations**
+
+---
+
+## Installation
+
+### Add ABFireBaseKit to Your Project Using Swift Package Manager
+
+In your `Package.swift`, add the following dependency:
+
+```swift
 dependencies: [
     .package(url: "https://github.com/akAshbog31/ABFirebaseKit.git", from: "1.0.0")
 ]
