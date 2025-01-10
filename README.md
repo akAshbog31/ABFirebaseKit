@@ -27,14 +27,14 @@ dependencies: [
 ]
 ```
 
-Requirements
+## Requirements
 
-iOS 13.0+
-Swift 5.5+
-Firebase SDK
-Xcode 13.0+
+- iOS 13.0+
+- Swift 5.5+
+- Firebase SDK
+- Xcode 13.0+
 
-Usage
+## Usage
 1. Firebase Services Protocol
 The package defines a protocol for Firebase operations:
 
@@ -117,7 +117,7 @@ extension DataBase: ABRealtimeEndPoint {
 }
 ```
 
-Firestore Implementation
+## Firestore Implementation
 
 ```
 extension DataBase: ABFireStoreEndPoint {
@@ -164,25 +164,24 @@ struct UserModel: ABFirebaseCodable {
 }
 ```
 
-Database Path Structure
-Realtime Database
+## Database Path Structure
+#### Realtime Database
 
 Users: `Users/<userId>`
 User Details: `Users/<userId>/<field>`
 
-Firestore
-
+## Firestore
 Collection: `USER`
 Documents: `<userId>`
 
-Switching Between Databases
+**Switching Between Databases**
 To switch between Realtime Database and Firestore:
 
 Use the appropriate extension (`ABRealtimeEndPoint` or `ABFireStoreEndPoint`)
 Update your Firebase configuration
 Use the corresponding service class (`ABRealtimeDatabaseService` or `ABFirestoreService`)
 
-Example:
+## Example:
 
 ```
 // For Realtime Database
@@ -192,25 +191,25 @@ try await ABRealtimeDatabaseService.request(for: DataBase.createUser(user: model
 try await FirestoreService.request(for: DataBase.createUser(user: model))
 ```
 
-Error Handling
+## Error Handling
 The package uses Swift's built-in error handling mechanisms. All async operations can throw errors that should be handled appropriately in your implementation.
-Best Practices
 
-Always handle authentication states
-Implement proper error handling
-Follow Firebase security rules
-Keep user data minimal and relevant
-Use appropriate database indexing
-Choose the appropriate database type based on your use case:
+## Best Practices
+- Always handle authentication states
+- Implement proper error handling
+- Follow Firebase security rules
+- Keep user data minimal and relevant
+- Use appropriate database indexing
+- Choose the appropriate database type based on your use case:
 
-Realtime Database: Better for real-time sync and simpler data
-Firestore: Better for complex queries and larger scale applications
+**Realtime Database:** Better for real-time sync and simpler data
+**Firestore:** Better for complex queries and larger scale applications
 
-Contributing
+## Contributing
 Contributions are welcome! Please feel free to submit a Pull Request.
 
-Author
+## Author
 Akash Boghani
 
-Support
+## Support
 For support, please create an issue in the repository or contact akashboghani111@gmail.com.
