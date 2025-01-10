@@ -12,11 +12,15 @@ Type-safe database operations
 
 Installation
 Add ABFireBaseKit to your project using Swift Package Manager:
-swiftCopydependencies: [
+
+```
+dependencies: [
     .package(url: "", from: "1.0.0")
 ]
+```
 
 Requirements
+
 iOS 13.0+
 Swift 5.5+
 Firebase SDK
@@ -25,7 +29,9 @@ Xcode 13.0+
 Usage
 1. Firebase Services Protocol
 The package defines a protocol for Firebase operations:
-swiftCopyprotocol FireBaseServices {
+
+```
+protocol FireBaseServices {
     func signUp(with email: String, password: String) async throws -> UserModel
     func signIn(with email: String, password: String) async throws
     func createUser(for model: UserModel) async throws
@@ -33,8 +39,12 @@ swiftCopyprotocol FireBaseServices {
     func getAllUser() async throws -> [UserModel]
     func getUserName(handler: @escaping (Result<[String: Any], Error>) -> Void)
 }
+```
+
 2. Firebase Manager Implementation
-swiftCopylet firebaseManager = FireBaseManager()
+
+```
+let firebaseManager = FireBaseManager()
 
 // Sign up a new user
 do {
@@ -55,20 +65,26 @@ do {
 // Create user in database
 let userModel = UserModel(id: "uniqueId", name: "John Doe", email: "john@example.com", createdAt: Date().formatted())
 try await firebaseManager.createUser(for: userModel)
+```
 
 3. Database Operations
 The package uses an enum-based approach for database operations:
-swiftCopyenum DataBase {
+
+```
+enum DataBase {
     case createUser(user: UserModel)
     case getUser(id: String)
     case getAllUser
     case getUserName(id: String)
 }
+```
 
 4. Database Extensions
 The package provides flexible database implementations through extensions. You can choose between Realtime Database and Firestore by implementing the appropriate extension.
 Realtime Database Implementation
-swiftCopyextension DataBase: ABRealtimeEndPoint {
+
+```
+extension DataBase: ABRealtimeEndPoint {
     var path: ABRealtimeDatabaseReference {
         switch self {
         case let .createUser(user):
@@ -91,9 +107,12 @@ swiftCopyextension DataBase: ABRealtimeEndPoint {
         }
     }
 }
+```
 
 Firestore Implementation
-swiftCopyextension DataBase: ABFireStoreEndPoint {
+
+```
+extension DataBase: ABFireStoreEndPoint {
     var path: ABFirestoreReference {
         switch self {
         case let .createUser(user):
@@ -114,44 +133,57 @@ swiftCopyextension DataBase: ABFireStoreEndPoint {
         }
     }
 }
+```
 
 5. Collection Types
 Define your collections using an enum:
-swiftCopyenum CollectionType: String {
+
+```
+enum CollectionType: String {
     case user
 }
+```
+
 6. User Model
-Define your user model conforming to ABFirebaseCodable:
-swiftCopystruct UserModel: ABFirebaseCodable {
+Define your user model conforming to `ABFirebaseCodable`:
+
+```
+struct UserModel: ABFirebaseCodable {
     var id: String
     var name: String?
     var email: String?
     var createdAt: String
 }
+```
+
 Database Path Structure
 Realtime Database
 
-Users: Users/<userId>
-User Details: Users/<userId>/<field>
+Users: `Users/<userId>`
+User Details: `Users/<userId>/<field>`
 
 Firestore
 
-Collection: USER
-Documents: <userId>
+Collection: `USER`
+Documents: `<userId>`
 
 Switching Between Databases
 To switch between Realtime Database and Firestore:
 
-Use the appropriate extension (ABRealtimeEndPoint or FireStoreEndPoint)
+Use the appropriate extension (`ABRealtimeEndPoint` or `ABFireStoreEndPoint`)
 Update your Firebase configuration
-Use the corresponding service class (ABRealtimeDatabaseService or FirestoreService)
+Use the corresponding service class (`ABRealtimeDatabaseService` or `ABFirestoreService`)
 
 Example:
-swiftCopy// For Realtime Database
+
+```
+// For Realtime Database
 try await ABRealtimeDatabaseService.request(for: DataBase.createUser(user: model))
 
 // For Firestore
 try await FirestoreService.request(for: DataBase.createUser(user: model))
+```
+
 Error Handling
 The package uses Swift's built-in error handling mechanisms. All async operations can throw errors that should be handled appropriately in your implementation.
 Best Practices
@@ -165,8 +197,6 @@ Choose the appropriate database type based on your use case:
 
 Realtime Database: Better for real-time sync and simpler data
 Firestore: Better for complex queries and larger scale applications
-
-
 
 Contributing
 Contributions are welcome! Please feel free to submit a Pull Request.
