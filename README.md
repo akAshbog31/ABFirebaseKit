@@ -15,7 +15,7 @@ Add ABFireBaseKit to your project using Swift Package Manager:
 
 ```
 dependencies: [
-    .package(url: "", from: "1.0.0")
+    .package(url: "https://github.com/akAshbog31/ABFirebaseKit.git", from: "1.0.0")
 ]
 ```
 
